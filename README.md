@@ -23,3 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Demo
 
 [Click here](https://next-js-todo-list-1zzuvqd4r-oxygent02s-projects.vercel.app/)
+
+## Reference
+
+- [Web Dev Simplified](https://www.youtube.com/watch?v=NgayZAuTgwM)
