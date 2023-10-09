@@ -22,4 +22,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Demo
 
-[Click here](https://next-js-todo-list-1zzuvqd4r-oxygent02s-projects.vercel.app/)
+[Click here](https://next-js-todo-list-xi.vercel.app)
