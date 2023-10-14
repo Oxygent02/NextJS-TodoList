@@ -1,3 +1,5 @@
+"use server";
+
 import { Suspense } from "react";
 import Header from "@/app/Header";
 import SectionTodo from "@/components/modules/SectionTodo/SectionTodo";
