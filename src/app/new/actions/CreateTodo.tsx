@@ -18,6 +18,6 @@ export async function createTodo(prevState: any, formData: FormData) {
     return { message: err.message };
   }
 
-  redirect("/");
+  redirect(".");
   return { message: null };
 }

@@ -7,10 +7,6 @@ import { updateStatusTodo } from "./actions/UpdateStatusTodo";
 import { ItemTodoLoading } from "@/components/elements/ItemTodo/ItemTodo.loading";
 
 export default function SectionTodo() {
-  const onHandleToogle = async (id: string, complete: boolean) => {
-    await updateStatusTodo(id, complete);
-  };
-
   type Todo = {
     id: string;
     title: string;
@@ -18,7 +14,7 @@ export default function SectionTodo() {
     createdAt: Date;
     updatedAt: Date;
   };
-
+  const [loading, setLoading] = useState<boolean>(true);
   const [todos, setTodo] = useState<Todo[]>([]);
 
   useEffect(() => {
@@ -29,14 +25,21 @@ export default function SectionTodo() {
       } else {
         console.error("Error fetching todo list.");
       }
+      setLoading(false);
     };
 
-    fetchTodo();
-  }, []);
+    if (loading) {
+      fetchTodo();
+    }
+  }, [loading]);
+
+  const onHandleToogle = async (id: string, complete: boolean) => {
+    await updateStatusTodo(id, complete);
+  };
 
   return (
     <>
-      {!todos || todos.length == 0 ? (
+      {loading ? (
         <ul className="pl-4">
           {[...Array(10)].map((x, i) => (
             <ItemTodoLoading key={i} />
