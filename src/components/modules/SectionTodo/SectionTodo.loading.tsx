@@ -1,13 +1,20 @@
-import { ItemTodoLoading } from "@/components/elements/ItemTodo/ItemTodo.loading";
+/* 
+deprecated
+this version requires server side rendering
+but since there is bug with cache server side rendering
+so it changed with client side rendering
+*/
 
-export default async function SectionTodoLoading() {
-  return (
-    <>
-      <ul className="pl-4">
-        {[...Array(100)].map((x, i) => (
-          <ItemTodoLoading key={i} />
-        ))}
-      </ul>
-    </>
-  );
-}
+// import { ItemTodoLoading } from "@/components/elements/ItemTodo/ItemTodo.loading";
+
+// export default function SectionTodoLoading() {
+//   return (
+//     <>
+//       <ul className="pl-4">
+//         {[...Array(100)].map((x, i) => (
+//           <ItemTodoLoading key={i} />
+//         ))}
+//       </ul>
+//     </>
+//   );
+// }

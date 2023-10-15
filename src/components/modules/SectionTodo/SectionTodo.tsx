@@ -1,32 +1,54 @@
+"use client";
+
 import { ItemTodo } from "@/components/elements/ItemTodo/ItemTodo";
-import { prisma } from "@/db";
+import { useEffect, useState } from "react";
+import { getTodo } from "./actions/GetTodo";
+import { updateStatusTodo } from "./actions/UpdateStatusTodo";
+import { ItemTodoLoading } from "@/components/elements/ItemTodo/ItemTodo.loading";
 
-export default async function SectionTodo() {
-  const getTodos = async () => {
-    return prisma.todo.findMany();
-  };
-
+export default function SectionTodo() {
   const onHandleToogle = async (id: string, complete: boolean) => {
-    "use server";
-    return await prisma.todo.update({
-      data: {
-        complete,
-      },
-      where: {
-        id,
-      },
-    });
+    await updateStatusTodo(id, complete);
   };
 
-  const todos = await getTodos();
+  type Todo = {
+    id: string;
+    title: string;
+    complete: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+
+  const [todos, setTodo] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    const fetchTodo = async () => {
+      const data = await getTodo();
+      if (data) {
+        setTodo(data);
+      } else {
+        console.error("Error fetching todo list.");
+      }
+    };
+
+    fetchTodo();
+  }, []);
 
   return (
     <>
-      <ul className="pl-4">
-        {todos.map((todo) => (
-          <ItemTodo key={todo.id} {...todo} toogleTodo={onHandleToogle} />
-        ))}
-      </ul>
+      {!todos || todos.length == 0 ? (
+        <ul className="pl-4">
+          {[...Array(10)].map((x, i) => (
+            <ItemTodoLoading key={i} />
+          ))}
+        </ul>
+      ) : (
+        <ul className="pl-4">
+          {todos.map((todo) => (
+            <ItemTodo key={todo.id} {...todo} toogleTodo={onHandleToogle} />
+          ))}
+        </ul>
+      )}
     </>
   );
 }
