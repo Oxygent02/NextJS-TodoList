@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/db";
-import { delay } from "@/utils/delay";
 import { redirect } from "next/navigation";
 
 export async function createTodo(prevState: any, formData: FormData) {
